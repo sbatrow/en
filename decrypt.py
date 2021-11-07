@@ -39,21 +39,8 @@ PASSWORDS = {
 }
 
 # some utility functions
-def error(error_msg = 'Corrupted/unsupported file.'):
-    stderr.write(f'\033[41m\033[30m X \033[0m {error_msg}\n')
-    stderr.flush()
 
-    exit(1)
 
-def warn(warn_msg):
-    stderr.write(f'\033[43m\033[30m ! \033[0m {warn_msg}\n')
-    stderr.flush()
-
-def ask(prompt):
-    stderr.write(f'\033[104m\033[30m ? \033[0m {prompt} ')
-    stderr.flush()
-
-    return input()
 
 def human_bool_to_bool(human_bool):
     return 'y' in human_bool
