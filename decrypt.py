@@ -22,6 +22,7 @@ from argparse import ArgumentParser
 from pathlib import Path
 
 from base64 import b64decode
+from base64 import b64encode
 
 from Crypto.Protocol.KDF import PBKDF2
 from Crypto.Cipher import AES
@@ -84,7 +85,7 @@ def main():
     if len(split_base64_contents) != 3:
         raise ValueError('Unsupported file.')
 
-    split_contents = list(map(b64decode, split_base64_contents))
+    split_contents = list(map(b64encode, split_base64_contents))
 
     # derive the key
     decryption_key = PBKDF2(PASSWORDS[file_ext], split_contents[0], hmac_hash_module=SHA256)
@@ -109,7 +110,7 @@ def main():
         output_file.write(decrypted_contents)
     elif args.stdout:
         # convert the config to UTF-8
-        config = decrypted_contents.decode('utf-8')
+        config = decrypted_contents.encode('utf-8')
 
         # write it to stdout
         stdout.write(config)
